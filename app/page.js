@@ -10,12 +10,18 @@ import { useState } from "react";
 
 export default function HomePage() {
   const [filteredDepartments, setFilteredDepartments] = useState(departments);
+  const [filteredNews, setFilteredNews] = useState(news);
 
   const handleSearch = (query) => {
-    const filtered = departments.filter((dept) =>
-      dept.name.toLowerCase().includes(query.toLowerCase())
+    const deptResults = departments.filter((d) =>
+      d.name.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredDepartments(filtered);
+    const newsResults = news.filter((n) =>
+      n.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setFilteredDepartments(deptResults);
+    setFilteredNews(newsResults);
   };
 
   return (
@@ -25,20 +31,22 @@ export default function HomePage() {
         <p>Your gateway to campus departments, news, and resources.</p>
       </div>
 
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} placeholder="Search departments or news..." />
 
       <h2>Featured Departments</h2>
       <div className="cards-container">
         {filteredDepartments.map((dept) => (
           <DepartmentCard key={dept.slug} department={dept} />
         ))}
+        {filteredDepartments.length === 0 && <p>No departments found.</p>}
       </div>
 
       <h2 style={{ marginTop: "40px" }}>Latest News</h2>
       <div className="cards-container">
-        {news.map((n) => (
+        {filteredNews.map((n) => (
           <NewsCard key={n.id} newsItem={n} />
         ))}
+        {filteredNews.length === 0 && <p>No news found.</p>}
       </div>
     </div>
   );

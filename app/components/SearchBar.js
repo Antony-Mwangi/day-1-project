@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, placeholder = "Search..." }) {
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
@@ -13,7 +13,7 @@ export default function SearchBar({ onSearch }) {
   return (
     <input
       type="text"
-      placeholder="Search departments..."
+      placeholder={placeholder}
       value={query}
       onChange={handleChange}
       style={{

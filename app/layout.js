@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 
 export const metadata = {
   title: "CampusConnect",
-  description: "Connecting students to campus resources seamlessly.",
+  description: "Campus information system built with Next.js",
 };
 
 export default function RootLayout({ children }) {
@@ -12,11 +12,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar />
-        <main>{children}</main>
+        <main style={{ minHeight: "80vh" }}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
   );
 }
-
-//Wraps every page with a consistent layout including Navbar and Footer
